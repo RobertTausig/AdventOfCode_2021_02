@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace AOC_02
@@ -8,6 +9,9 @@ namespace AOC_02
     {
         public static void Main(string[] filePaths)
         {
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
             int horizontal = 0;
             int depth = 0;
             int aim = 0;
@@ -18,7 +22,7 @@ namespace AOC_02
             var input = File.ReadAllLines(filePaths[0]);
             foreach (var item in input)
             {
-                var instructionVal = (int)item[^1] -48;
+                var instructionVal = (int)item[^1] - 48;
                 if (item[0] == cmdForward)
                 {
                     horizontal += instructionVal;
@@ -33,9 +37,12 @@ namespace AOC_02
                     aim -= instructionVal;
                 }
             }
+
+            stopWatch.Stop();
             Console.WriteLine("Horizontal: " + horizontal.ToString());
             Console.WriteLine("Depth: " + depth.ToString());
-            Console.WriteLine("Multiply: " + (horizontal*depth).ToString());
+            Console.WriteLine("Multiply: " + (horizontal * depth).ToString());
+            Console.WriteLine("Elapsed time [ms]: " + stopWatch.ElapsedMilliseconds.ToString());
         }
     }
 }
